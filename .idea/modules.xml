@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BadegeView.iml" filepath="$PROJECT_DIR$/BadegeView.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BadgeView.iml" filepath="$PROJECT_DIR$/BadgeView.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
     </modules>
   </component>

@@ -42,9 +42,10 @@ public class BadgeView extends View {
     private int topMargin = 0;
     private int bottomMargin = 0;
     private int rightMargin = 0;
-    private boolean hasBind=false;
-    private int horiontalSpace=0;
-    private int verticalSpace=0;
+    private boolean hasBind = false;
+    private int horiontalSpace = 0;
+    private int verticalSpace = 0;
+
     public BadgeView(Context context) {
         super(context);
         init(context);
@@ -176,7 +177,6 @@ public class BadgeView extends View {
      * @param right
      * @param bottom
      * @return
-     *
      */
     @Deprecated
     public BadgeView setMargin(int left, int top, int right, int bottom) {
@@ -189,17 +189,17 @@ public class BadgeView extends View {
     }
 
     /**
-     *
-     * @param horitontal  horitontal space  unit dp
-     * @param vertical    vertical space unnit dp
+     * @param horitontal horitontal space  unit dp
+     * @param vertical   vertical space unnit dp
      * @return
      */
-    public BadgeView setSpace(int horitontal, int vertical){
-        horiontalSpace=dip2px(getContext(), horitontal);
-        verticalSpace=dip2px(getContext(), vertical);
+    public BadgeView setSpace(int horitontal, int vertical) {
+        horiontalSpace = dip2px(getContext(), horitontal);
+        verticalSpace = dip2px(getContext(), vertical);
         invalidate();
-        return  this;
+        return this;
     }
+
     /**
      * @param sp the unit is sp
      * @return
@@ -236,6 +236,7 @@ public class BadgeView extends View {
         invalidate();
         return this;
     }
+
     /**
      * set gravity must be before @link bind() method
      *
@@ -255,7 +256,7 @@ public class BadgeView extends View {
             ((ViewGroup) getParent()).removeView(this);
         if (view == null)
             return this;
-        if ((view.getParent() instanceof FrameLayout)&&hasBind==true) {
+        if ((view.getParent() instanceof FrameLayout) && hasBind == true) {
             ((FrameLayout) view.getParent()).addView(this);
             return this;
         } else if (view.getParent() instanceof ViewGroup) {
@@ -264,42 +265,42 @@ public class BadgeView extends View {
             ((ViewGroup) view.getParent()).removeView(view);
             FrameLayout container = new FrameLayout(getContext());
             ViewGroup.LayoutParams containerParams = view.getLayoutParams();
-            int origionHeight=containerParams.height;
-            int origionWidth=containerParams.width;
-            FrameLayout.LayoutParams viewLayoutParams =new FrameLayout.LayoutParams( origionWidth, origionHeight);
-            if(origionHeight==ViewGroup.LayoutParams.WRAP_CONTENT){
+            int origionHeight = containerParams.height;
+            int origionWidth = containerParams.width;
+            FrameLayout.LayoutParams viewLayoutParams = new FrameLayout.LayoutParams(origionWidth, origionHeight);
+            if (origionHeight == ViewGroup.LayoutParams.WRAP_CONTENT) {
                 containerParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-                viewLayoutParams.topMargin=topMargin;
-                viewLayoutParams.bottomMargin=bottomMargin;
-            }else{
-                containerParams.height =origionHeight+topMargin+bottomMargin+verticalSpace;
+                viewLayoutParams.topMargin = topMargin;
+                viewLayoutParams.bottomMargin = bottomMargin;
+            } else {
+                containerParams.height = origionHeight + topMargin + bottomMargin + verticalSpace;
             }
-            if(origionWidth==ViewGroup.LayoutParams.WRAP_CONTENT){
+            if (origionWidth == ViewGroup.LayoutParams.WRAP_CONTENT) {
                 containerParams.width = ViewGroup.LayoutParams.WRAP_CONTENT;
-                viewLayoutParams.leftMargin=leftMargin;
-                viewLayoutParams.rightMargin=rightMargin;
-            }else{
-                containerParams.width=origionWidth+rightMargin+horiontalSpace+leftMargin;
+                viewLayoutParams.leftMargin = leftMargin;
+                viewLayoutParams.rightMargin = rightMargin;
+            } else {
+                containerParams.width = origionWidth + rightMargin + horiontalSpace + leftMargin;
             }
             container.setLayoutParams(containerParams);
 
             //setGravity
             FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) getLayoutParams();
-            if(params.gravity==(Gravity.RIGHT|Gravity.TOP)||params.gravity==Gravity.RIGHT||params.gravity==Gravity.TOP){
-                view.setPadding(0,verticalSpace,horiontalSpace,0);
-                viewLayoutParams.gravity=Gravity.LEFT|Gravity.BOTTOM;
-            }else if(params.gravity==(Gravity.LEFT|Gravity.TOP)||params.gravity==Gravity.LEFT||params.gravity==Gravity.TOP){
-                view.setPadding(horiontalSpace,verticalSpace,0,0);
-                viewLayoutParams.gravity=Gravity.RIGHT|Gravity.BOTTOM;
-            }else if(params.gravity==(Gravity.LEFT|Gravity.BOTTOM)){
-                view.setPadding(horiontalSpace,0,0,verticalSpace);
-                viewLayoutParams.gravity=Gravity.RIGHT|Gravity.TOP;
-            }else if(params.gravity==(Gravity.RIGHT|Gravity.BOTTOM)){
-                view.setPadding(0,0,horiontalSpace,verticalSpace);
-                viewLayoutParams.gravity=Gravity.LEFT|Gravity.TOP;
-            }else{
-                view.setPadding(0,verticalSpace,horiontalSpace,0);
-                viewLayoutParams.gravity=Gravity.LEFT|Gravity.BOTTOM;
+            if (params.gravity == (Gravity.RIGHT | Gravity.TOP) || params.gravity == Gravity.RIGHT || params.gravity == Gravity.TOP) {
+                view.setPadding(0, verticalSpace, horiontalSpace, 0);
+                viewLayoutParams.gravity = Gravity.LEFT | Gravity.BOTTOM;
+            } else if (params.gravity == (Gravity.LEFT | Gravity.TOP) || params.gravity == Gravity.LEFT || params.gravity == Gravity.TOP) {
+                view.setPadding(horiontalSpace, verticalSpace, 0, 0);
+                viewLayoutParams.gravity = Gravity.RIGHT | Gravity.BOTTOM;
+            } else if (params.gravity == (Gravity.LEFT | Gravity.BOTTOM)) {
+                view.setPadding(horiontalSpace, 0, 0, verticalSpace);
+                viewLayoutParams.gravity = Gravity.RIGHT | Gravity.TOP;
+            } else if (params.gravity == (Gravity.RIGHT | Gravity.BOTTOM)) {
+                view.setPadding(0, 0, horiontalSpace, verticalSpace);
+                viewLayoutParams.gravity = Gravity.LEFT | Gravity.TOP;
+            } else {
+                view.setPadding(0, verticalSpace, horiontalSpace, 0);
+                viewLayoutParams.gravity = Gravity.LEFT | Gravity.BOTTOM;
             }
 
             view.setLayoutParams(viewLayoutParams);
@@ -307,7 +308,7 @@ public class BadgeView extends View {
             container.addView(view);
             container.addView(this);
             parentContainer.addView(container, viewIndex);
-            hasBind=true;
+            hasBind = true;
         } else if (view.getParent() == null) {
             Log.e("badgeview", "View must have a parent");
         }
@@ -316,10 +317,10 @@ public class BadgeView extends View {
 
     public boolean unbind() {
         if (getParent() != null) {
-//            ViewGroup.LayoutParams layoutParams = ((ViewGroup)getParent()).getLayoutParams();
-//            layoutParams.width = layoutParams.width - leftMargin - rightMargin;
-//            layoutParams.height = layoutParams.height -topMargin - bottomMargin;
-//            ((ViewGroup)getParent()).setLayoutParams(layoutParams);
+            ViewGroup.LayoutParams layoutParams = ((ViewGroup) getParent()).getLayoutParams();
+            layoutParams.width = layoutParams.width - leftMargin - rightMargin;
+            layoutParams.height = layoutParams.height - topMargin - bottomMargin;
+            ((ViewGroup) getParent()).setLayoutParams(layoutParams);
             ((ViewGroup) getParent()).removeView(this);
             return true;
         }
